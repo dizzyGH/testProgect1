@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.4.0.final using JasperReports Library version 6.4.1  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="TestReport1" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="5ee23fd8-8fd3-4dc6-91a9-bdf30b6d146d">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="postgres"/>
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<queryString>
+		<![CDATA[select distinct ssoid, formid from user_data
+where ymdh > (localtimestamp - INTERVAL '1 hour')
+order by ssoid, formid]]>
+	</queryString>
+	<field name="ssoid" class="java.lang.String"/>
+	<field name="formid" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="50" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="555" height="50" uuid="e6b24bbc-5137-43e1-8f5b-186bc3e9c635"/>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[список пользователей и используемых ими форм за последний час]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="30" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="280" height="30" uuid="a898f802-38fb-4c84-ab1c-73513bcde8f6">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[ssoid]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="280" y="0" width="275" height="30" uuid="6d122ad4-82d1-4cac-a931-879402304be4"/>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[formid]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<detail>
+		<band height="30" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="280" height="30" uuid="0f584e73-1d7e-4e6d-ab8d-727c54441262"/>
+				<textFieldExpression><![CDATA[$F{ssoid}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="280" y="0" width="275" height="30" uuid="0cbe7051-ea83-4a8f-b441-8c3436f1dee0"/>
+				<textFieldExpression><![CDATA[$F{formid}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>

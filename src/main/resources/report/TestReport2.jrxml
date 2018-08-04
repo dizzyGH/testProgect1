@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.4.0.final using JasperReports Library version 6.4.1  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="TestReport2" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="3ef7adb5-2b6a-482e-a81f-08fed7817826">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="postgres"/>
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<queryString>
+		<![CDATA[select ssoid, formid, ts, subtype
+from user_data
+
+where grp like 'dszn_%' 
+
+order by ssoid, formid, ts]]>
+	</queryString>
+	<field name="ssoid" class="java.lang.String"/>
+	<field name="formid" class="java.lang.String"/>
+	<field name="ts" class="java.lang.Integer"/>
+	<field name="subtype" class="java.lang.String"/>
+	<variable name="start" class="java.lang.Integer" calculation="Sum">
+		<variableExpression><![CDATA[$F{subtype}.equals("start") ? 1 : 0]]></variableExpression>
+		<initialValueExpression><![CDATA[0]]></initialValueExpression>
+	</variable>
+	<variable name="send" class="java.lang.Integer" resetType="Group" resetGroup="Group1" calculation="Sum">
+		<variableExpression><![CDATA[$F{subtype}.equals("send") ? 1 : 0]]></variableExpression>
+		<initialValueExpression><![CDATA[0]]></initialValueExpression>
+	</variable>
+	<variable name="startTs" class="java.lang.Integer">
+		<variableExpression><![CDATA[$F{subtype}.equals("start") ? $F{ts} : $V{startTs}]]></variableExpression>
+		<initialValueExpression><![CDATA[0]]></initialValueExpression>
+	</variable>
+	<variable name="Variable_2" class="java.lang.String"/>
+	<group name="Group1">
+		<groupExpression><![CDATA[$V{start}]]></groupExpression>
+		<groupFooter>
+			<band height="30">
+				<textField>
+					<reportElement x="0" y="0" width="180" height="30" uuid="f7bb6916-e09f-4f08-97f9-57e539a39a2c"/>
+					<textFieldExpression><![CDATA[$F{ssoid}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="180" y="0" width="81" height="30" uuid="795f9ea8-0460-402c-9190-1391346b1f0a"/>
+					<textFieldExpression><![CDATA[$F{formid}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="440" y="0" width="90" height="30" uuid="e418b7cf-0e1e-45c0-bb05-a4563905bcdc"/>
+					<textFieldExpression><![CDATA[$F{ts}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="350" y="0" width="90" height="30" uuid="0f047bbb-7b70-4636-9093-bcbf6ceda42c"/>
+					<textFieldExpression><![CDATA[$F{subtype}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="270" y="0" width="80" height="30" uuid="b21db0dd-fe2f-4245-8a7d-c310b1b0f392"/>
+					<textFieldExpression><![CDATA[$V{startTs}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupFooter>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="61" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="530" height="61" uuid="ae539bf5-c4c5-4ad3-b957-0fe81d410ebe"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="19"/>
+				</textElement>
+				<text><![CDATA[Список пользователей, которые начали активность на форме и не дошли до конца]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="30" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="180" height="30" uuid="57e6082b-1e67-4ad7-afb5-049dc5183064"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[ssoid]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="180" y="0" width="89" height="30" uuid="85291c6f-9e1e-400d-8a58-6ebc823b56c4"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[formid]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="270" y="0" width="80" height="30" uuid="7315ef84-c8c6-4fb2-9b97-5aa189048a93"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[startTs]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="350" y="0" width="90" height="30" uuid="f2df4aee-b843-49c9-88c2-6d4cf8e595bb"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[lastSubType]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="440" y="0" width="90" height="30" uuid="831e6250-de86-49f3-971f-366de6ab567b"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[lastSubTypeTs]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+</jasperReport>
